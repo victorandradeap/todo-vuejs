@@ -1,12 +1,10 @@
 <template>
-    <div>
-        <input 
-            type="text"
-            v-model="description"
-            placeholder='New task'
-            @keyup.enter="handleAdd()"
-        />
-    </div>
+	<b-form-input
+		type="text"
+		v-model="description"
+		placeholder="New Task"
+		@keyup.enter="handleAdd()"
+	/>
 </template>
 <script>
 const MUTATION_UPDATE_DESCRIPTION = 'updateDescription';

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'http://localhost:3003/api/todos';
+const URL = 'http://192.168.120.213:3003/api/todos';
 
 export default {
     get() {

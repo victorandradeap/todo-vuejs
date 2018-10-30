@@ -1,25 +1,33 @@
 <template>
-    <div>
-        <h1>Todo</h1>
-        <todo-form 
-			:handleAdd="addNewTask"
-		/>
-        <todo-actions 
-			:handleAdd="addNewTask"
-			:handleSearch="searchTask"
-			:handleClear="clearSearch"
-		/>
-        <todo-list 
-			:list="tasks"
-			:handleRemove="removeTask"
-			:handleChange="changePropertyDone"
-		/>
-    </div>
+    <b-container class="main-container">
+		<b-row>
+			<b-col cols="8">
+				<todo-form 
+					:handleAdd="addNewTask"
+				/>
+			</b-col>
+			<b-col cols="4">
+				<todo-actions 
+					:handleAdd="addNewTask"
+					:handleSearch="searchTask"
+					:handleClear="clearSearch"
+				/>
+			</b-col>
+		</b-row>
+		<b-row>
+			<b-col>
+				<todo-list 
+					:tasks="tasks"
+					:handleRemove="removeTask"
+					:handleChange="changePropertyDone"
+				/>
+			</b-col>
+		</b-row>
+    </b-container>
 </template>
 
 <script>
 import api from '@/services/api';
-
 import TodoForm from '@/views/TodoForm';
 import TodoActions from '@/views/TodoActions';
 import TodoList from '@/views/TodoList';
@@ -31,11 +39,11 @@ export default {
 	components: {
 		TodoForm,
 		TodoActions,
-		TodoList,
+		TodoList
 	},
 	data() {
 		return {
-			tasks: [],
+			tasks: []
 		}
 	},
 	created() {
@@ -75,13 +83,16 @@ export default {
 		},
 		changePropertyDone(task) {
 			api.handleChangeDoneProperty(task).then(() => {
-				this.tasks.map(element => {
-					if(element._id == task._id) {
-						element.done = !task.done;
-					}
-				})
+				this.refresh();
 			});
-		},
-	},
+		}
+	}
 };
 </script>
+
+<style>
+.main-container {
+	margin-top: 20px;
+}
+</style>
+

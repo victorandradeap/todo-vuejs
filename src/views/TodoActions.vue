@@ -1,25 +1,25 @@
 <template>
-  	<div>
-    	<button
+  	<b-button-group class="list-button">
+    	<b-button
 			class=""
 			v-if="handleAdd"
 			@click="handleAdd()"
     	> 
     		Add
-		</button>
-		<button
+		</b-button>
+		<b-button
 			v-if="handleSearch"
 			@click="handleSearch()"
 		>
 			Search
-		</button>
-		<button
+		</b-button>
+		<b-button
 			v-if="handleClear"
 			@click="handleClear()"	
 		>
 			Clear
-		</button>
-  	</div>
+		</b-button>
+  	</b-button-group>
 </template>
 
 <script>
@@ -41,5 +41,12 @@ export default {
 	},
 }
 </script>
+
+<style scoped>
+.list-button {
+	float: right;
+}
+</style>
+
 
 

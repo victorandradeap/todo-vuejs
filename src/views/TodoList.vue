@@ -1,39 +1,70 @@
 <template>
-    <div>
+    <b-list-group class="list-group">
         <p v-if="isEmpty">No data to display!</p>
-        <ul v-else>
-            <li v-for="task in list" :key="task._id">
-                {{task.description}}
-                <span
-                    @click="handleChange(task)"
-                >
-                    {{iconChange(task.done)}}
-                </span>
-                <span
-                    @click="handleRemove(task._id)"
-                >
-                    X
-                </span>
-            </li>
-        </ul>
-    </div>
+        <b-list-group-item v-for="task in tasks" :key="task._id" v-else>
+            <b-row>
+                <b-col cols="10">
+                    {{task.description}}
+                </b-col>
+                <b-col cols="2">
+                    <font-awesome-icon
+                        v-if="handleChange"
+                        v-show="iconChange(task.done)"  
+                        icon="circle" 
+                        @click="handleChange(task)"
+                    />
+                    <font-awesome-icon
+                        v-if="handleChange"
+                        v-show="!iconChange(task.done)" 
+                        icon="check"  
+                        @click="handleChange(task)"
+                    />
+                    <font-awesome-icon
+                        v-if="handleRemove"
+                        icon="trash" 
+                        @click="handleRemove(task._id)"
+                    />
+                </b-col>
+            </b-row>
+        </b-list-group-item>
+    </b-list-group>
 </template>
-<script>
-import api from '@/services/api';
 
+<script>
 export default {
-    name: 'TodoList',
-    props: ['list', 'handleRemove', 'handleChange'],
+    name: "TodoList",
+    props: {
+        tasks: {
+            type: Array,
+            required: true
+        }, 
+        handleRemove: {
+            type: Function,
+            required: false
+        },
+        handleChange: {
+            type: Function,
+            required: false
+        }
+    },
     computed: {
         isEmpty() {
-            return this.list.length == 0;  
-        },
+            return this.tasks.length == 0;
+        }
     },
     methods: {
         iconChange(done) {
-            return done ? 'F' : 'V';
-        },
-    },
-}
+            return done ? false : true;
+        }
+    }
+};
 </script>
+
+<style scoped>
+.list-group {
+    width: 100%;
+    margin-top: 15px;
+}
+</style>
+
 
