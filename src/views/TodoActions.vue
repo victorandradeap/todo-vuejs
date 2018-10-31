@@ -1,24 +1,30 @@
 <template>
   	<div>
-    	<button
+    	<v-btn 
+			fab dark small
+			color="rgb(53,73,94)"
 			class=""
 			v-if="handleAdd"
 			@click="handleAdd()"
     	> 
-    		Add
-		</button>
-		<button
+    		<v-icon dark>add</v-icon>
+		</v-btn>
+		<v-btn
+			fab dark small
+			color="rgb(53,73,94)"
 			v-if="handleSearch"
 			@click="handleSearch()"
 		>
-			Search
-		</button>
-		<button
+			<v-icon dark>search</v-icon>
+		</v-btn>
+		<v-btn
+			fab dark small
+			color="rgb(53,73,94)"
 			v-if="handleClear"
 			@click="handleClear()"	
 		>
-			Clear
-		</button>
+			<v-icon dark>clear</v-icon>
+		</v-btn>
   	</div>
 </template>
 

@@ -1,12 +1,13 @@
 <template>
-    <div>
-        <input 
+    <v-form>
+        <v-text-field
             type="text"
+			color="rgb(65,184,131)"
             v-model="description"
-            placeholder='New task'
+            label="New task"
             @keyup.enter="handleAdd()"
         />
-    </div>
+    </v-form>
 </template>
 <script>
 const MUTATION_UPDATE_DESCRIPTION = 'updateDescription';
