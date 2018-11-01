@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h3 v-if="isEmpty()">
+    <p class="warning-empty" v-if="isEmpty()">
       <v-icon>nature_people</v-icon>
       Nothing here, add a new task!
-    </h3>
+    </p>
     <v-list v-else>
       <v-list-tile
         class="task-list"
@@ -58,8 +58,12 @@ export default {
 </script>
 
 <style scoped>
+.warning-empty {
+  font-family: Raleway;
+  color: #606060;
+}
 .task-list:hover {
-  background-color: rgba(156, 220, 191, 0.2);
+  background-color: rgba(150, 150, 150, 0.2);
   border-radius: 30px 30px 30px;
 }
 .done-false {

@@ -6,14 +6,10 @@
 
 <script>
 export default {
-  	name: 'App',
+  name: 'App',
 }
 </script>
 
 <style>
-* {
-  font-family: Montserrat-Light;
-}
+@import url('https://fonts.googleapis.com/css?family=Raleway');
 </style>
-
-
