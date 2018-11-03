@@ -1,13 +1,13 @@
 <template>
-  	<div>
-    	<v-btn 
+	<div>
+		<v-btn 
 			fab dark small
 			color="rgb(53,73,94)"
 			class=""
 			v-if="handleAdd"
 			@click="handleAdd()"
-    	> 
-    		<v-icon dark>add</v-icon>
+		> 
+			<v-icon dark>add</v-icon>
 		</v-btn>
 		<v-btn
 			fab dark small
@@ -25,27 +25,27 @@
 		>
 			<v-icon dark>clear</v-icon>
 		</v-btn>
-  	</div>
+	</div>
 </template>
 
 <script>
 export default {
-	name: 'TodoActions',
-	props: {
-		handleAdd: {
+  name: 'Actions',
+  props: {
+    handleAdd: {
 			type: Function,
-			required: false,
-		},
-		handleSearch: {
-			type: Function,
-			required: false,
-		},
-		handleClear: {
-			type: Function,
-			required: false,
-		},
-	},
-}
+			required: false
+    },
+    handleSearch: {
+      type: Function,
+      required: false
+    },
+    handleClear: {
+      type: Function,
+      required: false
+    }
+  }
+};
 </script>
 
 

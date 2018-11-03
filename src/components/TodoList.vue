@@ -1,49 +1,47 @@
 <template>
-    <v-container grid-list-xl text-xs-center>
-		<v-layout row wrap>
-		<v-flex xs12>
-			<img src="@/assets/logo.png" class="header-img"/>
-			<p class="header-title">A Vue.js todo<b class="spotlight">list</b></p>
-			<p class="header-subtitle">
-        A simple todo list app built with 
-        <span class="vuejs">Vue.js</span> and 
-        <span>Vuetify</span>.
-      </p>
-		</v-flex>
-		<v-flex xs9>
-			<todo-form 
-				:handleAdd="addNewTask"
-			/>
-		</v-flex>
-		<v-flex xs3>
-			<todo-actions 
-				:handleAdd="addNewTask"
-				:handleSearch="searchTask"
-				:handleClear="clearSearch"
-			/>
-		</v-flex>
-		<v-flex xs12>
-			<todo-list 
-				:list="tasks"
-				:handleRemove="removeTask"
-				:handleChange="changePropertyDone"
-			/>
-		</v-flex>
-		</v-layout>
+    <v-container class="container" grid-list-xl text-xs-center>
+      <v-layout row wrap>
+        <v-flex xs12>
+          <img src="@/assets/images/vue.png" class="header-img"/>
+          <p class="header-title">A Vue.js todo<b class="spotlight">list</b></p>
+          <p class="header-subtitle">
+            A simple todo list app built with 
+            <span class="icon vuejs">Vue.js</span> and 
+            <span class="icon vuetify">Vuetify</span>.
+          </p>
+        </v-flex>
+        <v-flex xs9>
+          <todo-form 
+            :handleAdd="addNewTask"
+          />
+        </v-flex>
+        <v-flex xs3>
+          <todo-actions 
+            :handleAdd="addNewTask"
+            :handleSearch="searchTask"
+            :handleClear="clearSearch"
+          />
+        </v-flex>
+        <v-flex xs12>
+          <todo-list 
+            :taskList="taskList"
+            :handleRemove="removeTask"
+            :handleChange="changePropertyDone"
+          />
+        </v-flex>
+      </v-layout>
     </v-container>
 </template>
 
 <script>
-import api from "@/services/api";
+import api from '@/services/api';
+import TodoForm from '@/views/Form';
+import TodoActions from '@/views/Actions';
+import TodoList from '@/views/List';
 
-import TodoForm from "@/views/TodoForm";
-import TodoActions from "@/views/TodoActions";
-import TodoList from "@/views/List";
-
-const MUTATION_CLEAR_DESCRIPTION = "clearDescription";
+const MUTATION_CLEAR_DESCRIPTION = 'clearDescription';
 
 export default {
-  name: "Todo",
   components: {
     TodoForm,
     TodoActions,
@@ -51,7 +49,7 @@ export default {
   },
   data() {
     return {
-      tasks: []
+      taskList: []
     };
   },
   created() {
@@ -60,7 +58,7 @@ export default {
   methods: {
     refresh() {
       api.get().then(response => {
-        this.tasks = response.data;
+        this.taskList = response.data;
       });
     },
     addNewTask() {
@@ -81,7 +79,7 @@ export default {
       let description = this.$store.getters.currentDescription;
       if (description) {
         api.handleSearch(description).then(response => {
-          this.tasks = response.data;
+          this.taskList = response.data;
         });
       }
     },
@@ -91,7 +89,7 @@ export default {
     },
     changePropertyDone(task) {
       api.handleChangeDoneProperty(task).then(() => {
-        this.tasks.map(element => {
+        this.taskList.map(element => {
           if (element._id == task._id) {
             element.done = !task.done;
           }
@@ -104,13 +102,13 @@ export default {
 
 <style>
 .header-title {
-  font-family: Raleway;
+  font-family: Roboto-Thin;
 	display: inline;
   font-size: 50px;
   font-weight: 50;
 }
 .header-subtitle {
-  font-family: Raleway;
+  font-family: Roboto-Light;
   color: #A7A7A7;
   font-size: 20px;
 	font-weight: 10;
@@ -121,30 +119,35 @@ export default {
 .header-img {
 	width: 55px;
 }
-.vuejs {
+.icon {
   position: relative;
 }
-.vuejs::after {
+.icon::after {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   opacity: 0;
   display: block;
-  transition: all 0.3s ease-in;
+  transition: all 0.6s ease-in;
 }
-.vuejs:hover::after {
+.icon:hover::after {
   opacity: 1;
-  transition: all 0.3s ease-in;
+  transition: all 0.6s ease-in;
 }
-.vuejs::after {
-  background-image: url('../assets/logo.png');
+.icon::after {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   height: 40px;
   width: 40px;
   transform: translate(25%, 70%);
+}
+.vuejs::after {
+  background-image: url('../assets/images/vue.png');
+}
+.vuetify::after {
+  background-image: url('../assets/images/vuetify.png');
 }
 </style>
 

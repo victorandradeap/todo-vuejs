@@ -6,14 +6,14 @@
     </p>
     <v-list v-else>
       <v-list-tile
-        class="task-list"
-        v-for="task in list"
+      class="task-list"
+        v-for="task in taskList"
         :key="task._id"
         @click="handleChange(task)"
       >
         <v-list-tile-content>
           <v-list-tile-title 
-            :class="propertyIcon(task.done)" 
+            :class="[ propertyIcon(task.done), 'task-text' ]"
             v-html="task.description"
           />
         </v-list-tile-content>
@@ -29,11 +29,12 @@
     </v-list>
   </div>
 </template>
+
 <script>
 export default {
-  name: "List",
+  name: 'List',
   props: {
-    list: {
+    taskList: {
       type: Array,
       required: true
     },
@@ -48,10 +49,10 @@ export default {
   },
   methods: {
     propertyIcon(done) {
-      return done ? "done-false" : "";
+      return done ? 'done-false' : '';
     },
     isEmpty() {
-      return this.list.length == 0;
+      return this.taskList.length == 0;
     }
   }
 };
@@ -59,13 +60,18 @@ export default {
 
 <style scoped>
 .warning-empty {
-  font-family: Raleway;
+  font-family: Roboto-Light;
   color: #606060;
 }
+
 .task-list:hover {
   background-color: rgba(150, 150, 150, 0.2);
-  border-radius: 30px 30px 30px;
 }
+
+.task-text {
+  font-family: Roboto-Light;
+}
+
 .done-false {
   text-decoration: line-through;
 }
