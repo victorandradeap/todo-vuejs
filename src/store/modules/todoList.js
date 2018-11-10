@@ -2,24 +2,23 @@ import {
     UPDATE_DESCRIPTION,
     CLEAR_DESCRIPTION
 } from '../mutations.type';
-import {
-    CURRENT_DESCRIPTION
-} from '../getters.type';
+import { CURRENT_DESCRIPTION } from '../getters.type';
 
 const state = {
     description: ''
-}
+};
 
 const getters = {
     [CURRENT_DESCRIPTION](state) {
         return state.description;
-    },
+    }
+};
 
-}
-
-const actions = {
-
-}
+/*
+ * Actions have not been used because 
+ * there is no async operation with state.
+ */
+const actions = {};
 
 const mutations = {
     [UPDATE_DESCRIPTION](state, payload) {
@@ -28,9 +27,8 @@ const mutations = {
 
     [CLEAR_DESCRIPTION](state) {
         state.description = "";
-    },
-
-}
+    }
+};
 
 export default {
     state,

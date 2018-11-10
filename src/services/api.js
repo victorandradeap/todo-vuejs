@@ -3,13 +3,14 @@ import axios from 'axios';
 const URL = 'http://localhost:3003/api/todos';
 
 export default {
-    get() {
-        return axios.get(`${URL}?sort=-createdAt`);
+    
+    get(description = '') {
+        const SEARCH = `$&description__regex=/${description}/`;
+        return axios.get(`${URL}?sort=-createdAt${SEARCH}`);
     },
 
     handleSearch(description) {
-        const SEARCH = `$&description__regex=/${description}/`;
-        return axios.get(`${URL}?sort=-createdAt${SEARCH}`);
+        return this.get(description);
     },
 
     handleAdd(description) {
@@ -22,6 +23,6 @@ export default {
 
     handleChangeDoneProperty(task) {
         return axios.put(`${URL}/${task._id}`, {...task, done: !task.done});
-    },
+    }
     
 } 
